@@ -74,6 +74,7 @@
                       [disabled]="!auth.temPermissao('ROLE_REMOVER_CIDADE')"></button>
                     <button role="button" pButton icon="fa fa-thermometer"
                       pTooltip="Clima" tooltipPosition="top"
+                      [disabled]="!auth.temPermissao('ROLE_CONSULTAR_CIDADE')"
                       [routerLink]="['/cidades/clima', rowData.cd_Cidade]"></button>
                 </td>
             </tr>
