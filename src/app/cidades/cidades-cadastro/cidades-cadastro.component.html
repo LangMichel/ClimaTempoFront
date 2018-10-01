@@ -1,0 +1,74 @@
+<div class="container">
+
+  <form #formCidadeCadastro="ngForm" autocomplete="off" (ngSubmit)="salvar(formCidadeCadastro)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Nova' }} Cidade</h1>
+
+      </div>
+
+      <div class="ui-g-4 ui-md-2 ui-fluid">
+          <label style="display: block" for="codigo">Código</label>
+          <input pInputText type="text" disabled="true" name="codigo"
+          [(ngModel)]="cidade.cd_Cidade">
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+          <span class="ui-float-label">
+              <input id="cidade" type="text" pInputText name="cidade"
+                [(ngModel)]="cidade.nm_Cidade" #nomeCidade="ngModel" required minlength="3">
+              <label for="cidade">Nome da cidade</label>
+          </span>
+
+         <app-messagens [control]="nomeCidade" error="required"
+                 text="Nome é obrigatório."></app-messagens>
+
+          <app-messagens [control]="nomeCidade" error="minlength"
+                text="Mínimo de {{ nomeCidade.errors?.minlength?.requiredLength }} caracteres."></app-messagens>
+       </div>
+
+       <div class="ui-g-12 ui-md-8 ui-fluid">
+          <span class="ui-float-label">
+              <input id="nomePais" type="text" pInputText [(ngModel)]="cidade.nm_Pais"
+                 name="nomePais" #nomePais="ngModel" maxlength="250">
+              <label for="nomePais">Nome País</label>
+          </span>
+       </div>
+
+       <div class="ui-g-12 ui-md-4 ui-fluid">
+          <span class="ui-float-label">
+              <input id="siglaPais" type="text" pInputText [(ngModel)]="cidade.sg_Pais"
+                name="siglaPais" #siglaPais="ngModel" maxlength="5" minlength="2" required>
+              <label for="siglaPais">Sigla País</label>
+          </span>
+
+          <app-messagens [control]="siglaPais" error="required"
+                 text="Sigla é obrigatório."></app-messagens>
+
+          <app-messagens [control]="siglaPais" error="minlength"
+                text="Mínimo de {{ siglaPais.errors?.minlength?.requiredLength }} caracteres."></app-messagens>
+
+        </div>
+
+       <div>
+        <button pButton type="submit" label="Salvar" icon="fa fa-cloud"
+            [disabled]="formCidadeCadastro.invalid"></button>
+
+        <button pButton type="button" label="Novo" icon="fa fa-plus-circle" class="ui-button-info"
+          (click)="novo(formCidadeCadastro)"></button>
+
+        <button pButton type="button" label="Voltar" class="ui-button-info"
+                  icon="fa fa-hand-o-left" routerLink="/cidades"></button>
+       </div>
+
+       <div style="width: 100%; padding-top: 50px; text-align: center"
+          *ngIf="exibirSpinner === true" class="container-loading">
+          <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="8" fill="#EEEEEE"
+          *ngIf="exibirSpinner === true"></p-progressSpinner>
+          <span *ngIf="exibirSpinner === true">Processando...</span>
+      </div>
+
+    </div>
+  </form>
+</div>

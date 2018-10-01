@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="ui-g">
+
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+        <div class="ui-g-12">
+          <h1>Pesquisar Cidade</h1>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+                <input id="nomeCidade" type="text" size="100" pInputText
+                  name="nomeCidade" [(ngModel)]="filtro.nomeCidade">
+                <label for="nomeCidade">Nome cidade</label>
+            </span>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+                <input id="nomePais" type="text" pInputText
+                  name="nomePais" [(ngModel)]="filtro.nomePais">
+                <label for="nomePais">Nome país</label>
+            </span>
+        </div>
+
+        <div class="ui-g-12">
+          <button pButton type="submit" label="Pesquisar" icon="fa fa-search"></button>
+        </div>
+    </form>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+
+      <p-table [value]="cidades" [responsive]="true" [paginator]="true" [loading]="carregandoRegistros"
+       [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
+       (onLazyLoad)="aoMudarPaginaGrid($event)"
+        #tabelaCidade>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th scope="col" class="col-codigo">Código</th>
+              <th scope="col">Nome Cidade</th>
+              <th scope="col">Nome Pais</th>
+              <th scope="col">Sigla Pais</th>
+              <th class="col-acoes" scope="col"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+            <tr>
+                <td scope="row" class="row-codigo">
+                  <span class="ui-column-title">Código:</span>
+                  {{rowData.cd_Cidade}}
+                </td>
+                <td scope="row">
+                  <span class="ui-column-title">Nome cidade:</span>
+                  {{rowData.nm_Cidade}}
+                </td>
+                <td scope="row">
+                    <span class="ui-column-title">Nome país:</span>
+                    {{rowData.nm_Pais}}
+                </td>
+                <td scope="row">
+                    <span class="ui-column-title">Sigla país:</span>
+                    {{rowData.sg_Pais | uppercase}}
+                </td>
+
+                <td class="col-acoes">
+                  <span class="ui-column-title">Ações</span>
+                    <button role="button" pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"
+                      [routerLink]="['/cidades', rowData.cd_Cidade]"
+                      [disabled]="!auth.temPermissao('ROLE_EDITAR_CIDADE')"></button>
+                    <button role="button" pButton icon="fa fa-trash" (click)="confirmarExclusao(rowData)"
+                      pTooltip="Excluir" tooltipPosition="top"
+                      [disabled]="!auth.temPermissao('ROLE_REMOVER_CIDADE')"></button>
+                    <button role="button" pButton icon="fa fa-thermometer"
+                      pTooltip="Clima" tooltipPosition="top"
+                      [routerLink]="['/cidades/clima', rowData.cd_Cidade]"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            Exibindo {{cidades?.length}} de um total de {{totalRegistros}} registro(s).
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="5">
+                    Nenhuma cidade encontrada.
+                </td>
+            </tr>
+        </ng-template>
+
+      </p-table>
+
+    </div>
+
+    <div class="ui-g-12">
+        <button pButton label="Nova Cidade" icon="fa fa-plus-circle" routerLink="/cidades/nova"></button>
+    </div>
+  </div>
+</div>

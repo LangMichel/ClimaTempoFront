@@ -1,0 +1,129 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #404C51;
+}
+
+label{
+  font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+  .container{
+  width: 1170px;
+  margin: 0 auto;
+  }
+  .login {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1.5rem;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@keyframes ui-progress-spinner-color {
+  100%,
+  0% {
+      stroke: #d62d20;
+  }
+  40% {
+      stroke: #0057e7;
+  }
+  66% {
+      stroke: #008744;
+  }
+  80%,
+  90% {
+      stroke: #ffa700;
+  }
+}
+
+.col-codigo{
+  width: 100px;
+}
+
+.row-codigo{
+  width: 100px;
+  text-align: right;
+}
+
+.col-trabalha{
+  width: 150px;
+}
+
+.col-aberto{
+  width: 180px;
+  text-align: center;
+}
+
+.col-diaPositivo{
+  width: 180px;
+  color: green;
+}
+
+.col-diaNegativo{
+  width: 180px;
+  color: red;
+}
+
+.col-status{
+  width: 100px;
+  text-align: left;
+}
+
+a.col-status{
+  text-decoration: none;
+}
+
+.col-nome{
+  width: 200px;
+  text-align: left;
+}
+
+.col-clima{
+  width: 100px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.col-acoes{
+  width: 140px;
+  text-align: center;
+}
+
+.col-datas{
+  width: 140px;
+  text-align: center;
+}
+
+.col-horas{
+  width: 120px;
+  text-align: center;
+}
+
+.col-valor{
+  width: 120px;
+  text-align: right;
+
+}
+
+.col-colunas{
+  font-weight: bold;
+}
+
+.container-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,.3);
+  }

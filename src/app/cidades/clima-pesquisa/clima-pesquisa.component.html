@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="ui-g">
+
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+      <div class="ui-g-12">
+        <h1>Clima da cidade: {{cidade.nm_Cidade}}, {{cidade.sg_Pais | uppercase}}</h1>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-carousel headerText="Clima para os próximo 5 dias" [value]="climaCidade" [numVisible]="5"
+      [responsive]="true" [firstVisible]="0" [pageLinks]="1" styleClass="ui-panelgrid-blank"
+      (onLazyLoad)="aoMudarPaginaGrid($event)" #tabelaClima>
+        <ng-template let-clima pTemplate="item">
+          <div class="ui-grid ui-grid-responsive">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-12">
+                <span *ngIf="clima.clima === 'Clear'"
+                  pTooltip="Tempo Limpo" tooltipPosition="left">
+                  <img class="col-clima" src="{{clima.linkIcone}}" width="100">
+                </span>
+                <span *ngIf="clima.clima === 'Rain'"
+                  pTooltip="Tempo Chuvoso" tooltipPosition="left">
+                  <img class="col-clima" src="{{clima.linkIcone}}" width="100">
+                </span>
+                <span *ngIf="clima.clima === 'Clouds'"
+                  pTooltip="Tempo Nublado" tooltipPosition="left">
+                  <img class="col-clima" src="{{clima.linkIcone}}" width="100">
+                </span>
+              </div>
+            </div>
+            <div class="ui-grid-row" pTooltip="Data: {{clima.dataClima | date:'dd/MM/y'}}">
+              <div style="font-weight: bold" class="ui-grid-col-6 col-colunas">Data: </div>
+              <div class="ui-grid-col-6">{{clima.dataClima | date:'dd/MM/y'}}</div>
+            </div>
+            <div class="ui-grid-row" pTooltip="Temperatura atual: {{clima.tempDia | number:'2.1-1'}} °C">
+              <div class="ui-grid-col-6 col-colunas">Temp.: </div>
+              <div class="ui-grid-col-6">{{clima.tempDia | number:'2.1-1'}} °C</div>
+            </div>
+            <div class="ui-grid-row" pTooltip="Temperatura máxima: {{clima.tempMax | number:'2.1-1'}} °C">
+              <div class="ui-grid-col-6 col-colunas">Temp. máx.: </div>
+              <div class="ui-grid-col-6">{{clima.tempMax | number:'2.1-1'}} °C</div>
+            </div>
+            <div class="ui-grid-row" pTooltip="Temperatura mínima: {{clima.tempMin | number:'2.1-1'}} °C">
+              <div class="ui-grid-col-6 col-colunas">Temp. mín.: </div>
+              <div class="ui-grid-col-6">{{clima.tempMin | number:'2.1-1'}} °C</div>
+            </div>
+            <div class="ui-grid-row" pTooltip="Umidade: {{clima.umidade | number:'2.2-2'}} %">
+                <div class="ui-grid-col-6 col-colunas">Umidade: </div>
+                <div class="ui-grid-col-6">{{clima.umidade | number:'2.2-2'}} %</div>
+            </div>
+            <div class="ui-grid-row" pTooltip="Nuvens: {{clima.nuvem | number:'2.2-2'}} %">
+                <div class="ui-grid-col-6 col-colunas">Nuvens: </div>
+                <div class="ui-grid-col-6">{{clima.nuvem | number:'2.2-2'}} %</div>
+            </div>
+            <div class="ui-grid-row" pTooltip="Velocidade vento: {{clima.vento | number:'2.2-2'}} m/s">
+                <div class="ui-grid-col-6 col-colunas">Vel. vento: </div>
+                <div class="ui-grid-col-6">{{clima.vento | number:'2.2-2'}} m/s</div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+
+      <div class="ui-g-12">
+        <button pButton label="Voltar" icon="fa fa-hand-o-left" class="ui-button-info"
+          routerLink="/cidades"></button>
+      </div>
+    </div>
+
+  </div>
+</div>

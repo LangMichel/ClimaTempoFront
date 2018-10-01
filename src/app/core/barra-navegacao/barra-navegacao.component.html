@@ -1,0 +1,21 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="ui-g">
+      <div class="ui-g-12">
+          <a href="javascript:;" class="navbar-toggle" (click)="exibirMenu = !exibirMenu"><i class="fa fa-bars"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="navbar-menu" [hidden]="!exibirMenu" role="menu">
+    <li class="navbar-user">{{ auth.jwtPayload?.nome }}</li>
+
+      <li class="navbar-menuitem" appBackgroundColorido routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_CONSULTAR_CIDADE')" role="menuitem">
+        <a routerLink="/cidades">Cidades</a></li>
+
+  <li class="navbar-menuitem" appBackgroundColorido><a href="javascript:;"
+    (click)="logout()" role="menuitem">Logout</a></li>
+  </ul>
+
+</nav>

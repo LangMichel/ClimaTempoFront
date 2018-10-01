@@ -1,0 +1,122 @@
+<div class="container">
+
+    <form autocomplete="off">
+
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <h1>Novo Cliente</h1>
+
+        </div>
+
+        <div class="ui-g-4 ui-md-2 ui-fluid">
+            <label style="display: block">Código</label>
+            <input pInputText type="text" disabled="true">
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" pInputText name="nome"
+                     ngModel #nome="ngModel" required minlength="3">
+                <label for="float-input">Nome</label>
+                <!--  {{ nome.errors | json }} !-->
+
+            </span>
+
+            <app-messagens [control]="nome" error="required"
+                 text="Nome é obrigatório."></app-messagens>
+
+            <app-messagens [control]="nome" error="minlength"
+                text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres."></app-messagens>
+         </div>
+
+          <div class="ui-g-12 ui-fluid">
+              <span class="ui-float-label">
+                  <input id="float-input" type="text" pInputText name="email"
+                    ngModel #email="ngModel" required email>
+                  <label for="float-input">E-mail</label>
+              </span>
+
+              <app-messagens [control]="email" error="required"
+                text="E-mail é obrigatório."></app-messagens>
+
+                <app-messagens [control]="email" error="email"
+                text="Informe um e-mail válido."></app-messagens>
+
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-fluid">
+              <span class="ui-float-label">
+                  <p-inputMask mask="(99)9999-9999" id="float-input"> </p-inputMask>
+                  <label for="float-input">Telefone</label>
+              </span>
+          </div>
+
+          <div class="ui-g-12 ui-md-6 ui-fluid">
+              <span class="ui-float-label">
+                  <p-inputMask mask="(99)9999-9999" id="float-input"> </p-inputMask>
+                  <label for="float-input">Celular</label>
+              </span>
+          </div>
+
+         <div class="ui-g-12 ui-md-9 ui-fluid">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" pInputText>
+                <label for="float-input">Logradouro</label>
+            </span>
+         </div>
+
+         <div class="ui-g-12 ui-md-3 ui-fluid">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" pInputText>
+                <label for="float-input">Número</label>
+            </span>
+         </div>
+
+         <div class="ui-g-12 ui-md-4 ui-fluid">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" pInputText>
+                <label for="float-input">Complemento</label>
+            </span>
+         </div>
+
+         <div class="ui-g-12 ui-md-4 ui-fluid">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" pInputText>
+                <label for="float-input">Bairro</label>
+            </span>
+         </div>
+
+         <div class="ui-g-12 ui-md-4 ui-fluid">
+            <span class="ui-float-label">
+                <p-inputMask mask="99.999-999" id="float-input"> </p-inputMask>
+                <label for="float-input">CEP</label>
+            </span>
+         </div>
+
+         <div class="ui-g-12 ui-md-6 ui-fluid">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" pInputText>
+                <label for="float-input">Cidade</label>
+            </span>
+         </div>
+
+         <div class="ui-g-12 ui-md-6 ui-fluid">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" pInputText>
+                <label for="float-input">Estado</label>
+            </span>
+         </div>
+
+         <div class="ui-g-12 ui-fluid">
+            <p-checkbox label="Ativo" value="S"></p-checkbox>
+         </div>
+
+         <div>
+          <button pButton type="submit" label="Salvar" icon="fa-gears"></button>
+          <button pButton type="button" label="Limpar" icon="fa-refresh" class="ui-button-info"></button>
+          <button pButton type="button" label="Voltar" class="ui-button-info"
+                    icon="fa-hand-o-left" routerLink="/clientes"></button>
+         </div>
+      </div>
+    </form>
+  </div>

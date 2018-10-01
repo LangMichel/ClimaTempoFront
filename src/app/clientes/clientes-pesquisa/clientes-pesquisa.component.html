@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="ui-g">
+
+      <form autocomplete="off" (ngSubmit)="pesquisar()" >
+
+            <div class="ui-g-12">
+              <h1>Pesquisa de Clientes</h1>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-fluid">
+              <span class="ui-float-label">
+                  <input id="float-input" type="text" size="30" pInputText style="width: 100px"
+                  name="codigo" [(ngModel)]="filtro.codigo">
+                  <label for="float-input">Código</label>
+              </span>
+            </div>
+
+            <div class="ui-g-12 ui-fluid">
+              <span class="ui-float-label">
+                  <input id="float-input" type="text" size="30" pInputText
+                     name="nome" [(ngModel)]="filtro.nome">
+                  <label for="float-input">Nome</label>
+              </span>
+          </div>
+
+          <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" size="30" pInputText
+                  name="email" [(ngModel)]="filtro.email">
+                <label for="float-input">E-mail</label>
+            </span>
+        </div>
+
+            <div class="ui-g-12">
+              <button pButton type="submit" label="Pesquisar" icon="fa-search"></button>
+            </div>
+      </form>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <p-dataTable [value]="clientes" [responsive]="true" emptyMessage="Nenhum cliente encontrado."
+         [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
+         (onLazyLoad)="aoMudarPaginaGrid($event)" #tabelaCliente>
+          <p-column field="cd_Pessoa" header="Código" styleClass="col-codigo"></p-column>
+          <p-column field="nm_Pessoa" header="Nome"></p-column>
+          <p-column field="email" header="E-mail"></p-column>
+          <p-column field="ativo" header="Status" styleClass="col-status">
+              <ng-template let-clientes="rowData" pTemplate="body">
+                  <span *ngIf="clientes.ativo" (click)="mudarStatus(clientes, false)">
+                      <a href="javaScript:;" pTooltip="Desativar" tooltipPosition="top" class="col-status">Ativo</a>
+                  </span>
+                  <span *ngIf="!clientes.ativo" (click)="mudarStatus(clientes, true)">
+                    <a href="javaScript:;" pTooltip="Ativar" tooltipPosition="top" class="col-status">Inativo</a>
+                  </span>
+            </ng-template>
+
+          </p-column>
+          <p-column styleClass="col-acoes">
+            <ng-template pTemplate="body" let-cliente="rowData">
+              <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+              <button pButton icon="fa-trash" (click)="confirmarExclusao(cliente)"
+                pTooltip="Excluir" tooltipPosition="top"></button>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+
+      <div class="ui-g-12">
+          <button pButton label="Novo Cliente" icon="fa-plus-square-o" routerLink="/clientes/novo"></button>
+          <button pButton label="Voltar" icon="fa-hand-o-left" class="ui-button-info"></button>
+      </div>
+    </div>
+  </div>
